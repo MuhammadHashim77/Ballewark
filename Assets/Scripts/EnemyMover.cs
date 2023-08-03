@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
-    [SerializeField] float waitTime = 1f;
+    [SerializeField] [Range(0f, 5f)]float speed = 1f;
 
     public GameObject tile_CornerPiece;
     public GameObject tile_CornerPiece90;
@@ -27,8 +27,6 @@ public class EnemyMover : MonoBehaviour
     {
         foreach (Waypoint waypoint in path)
         {
-            yield return new WaitForSeconds(waitTime);
-
             // Calculate the direction from the last waypoint to the current one
             Vector3 direction = (waypoint.transform.position - lastPosition).normalized;
             GameObject prefabToInstantiate = null;
@@ -81,7 +79,18 @@ public class EnemyMover : MonoBehaviour
             lastPosition = waypoint.transform.position;
 
             // Move the ball to the current waypoint
-            transform.position = waypoint.transform.position;
+            Vector3 startPosition = transform.position;
+            Vector3 endPosition = waypoint.transform.position;
+            float travelAmount = 0f;
+
+            transform.LookAt(endPosition);
+
+            while(travelAmount < 1f)
+            {
+                travelAmount += Time.deltaTime * speed;
+                transform.position = Vector3.Lerp(startPosition, endPosition, travelAmount);
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 }
