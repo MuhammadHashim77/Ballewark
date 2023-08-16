@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
-    [SerializeField] float waitTime = 1f;
+    [SerializeField] float waitTime = 1f,speed;
 
     public GameObject tile_CornerPiece;
     public GameObject tile_CornerPiece90;
@@ -14,8 +14,8 @@ public class EnemyMover : MonoBehaviour
     public GameObject tile_roadStraight;
     public GameObject tile_roadStraight90;
 
-    private Vector3 lastPosition;
-    private Vector3 beforeLastPosition;
+    [SerializeField]private Vector3 lastPosition;
+    [SerializeField]private Vector3 beforeLastPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -81,7 +81,18 @@ public class EnemyMover : MonoBehaviour
             lastPosition = waypoint.transform.position;
 
             // Move the ball to the current waypoint
-            transform.position = waypoint.transform.position;
+            Vector3 startPosition = transform.position;
+            Vector3 endPosition = waypoint.transform.position;
+            float travelAmount = 0f;
+            
+            transform.LookAt(endPosition);
+
+            while(travelAmount < 1f)
+            {
+                travelAmount += Time.deltaTime * speed;
+                transform.position = Vector3.Lerp(startPosition, endPosition, travelAmount);
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 }
