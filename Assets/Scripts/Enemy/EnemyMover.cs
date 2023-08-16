@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyMover : MonoBehaviour
 {
@@ -85,12 +86,16 @@ public class EnemyMover : MonoBehaviour
 
             transform.LookAt(endPosition);
 
-            while(travelAmount < 1f)
+            while (travelAmount < 1f)
             {
                 travelAmount += Time.deltaTime * speed;
                 transform.position = Vector3.Lerp(startPosition, endPosition, travelAmount);
                 yield return new WaitForEndOfFrame();
             }
+
         }
     }
+
 }
+
+
