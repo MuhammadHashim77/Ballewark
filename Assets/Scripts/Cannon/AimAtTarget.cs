@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AimAtTarget : MonoBehaviour
@@ -9,22 +6,54 @@ public class AimAtTarget : MonoBehaviour
     [SerializeField] private Transform cannonBase;
 
     private Transform target;
+    private Color cannonColor;
 
-    // Start is called before the first frame update
     void Start()
     {
-        target = FindObjectOfType<EnemyMover>().transform;
+        // Get the color of the cannon.
+        Renderer cannonRenderer = GetComponentInChildren<Renderer>();
+        if (cannonRenderer)
+        {
+            cannonColor = cannonRenderer.sharedMaterial.color; // Assuming it might be a prefab, use sharedMaterial
+        }
+
+        FindMatchingTarget();
     }
 
-    // Update is called once per frame
     void Update()
     {
         AimWeapon();
     }
 
+    private void FindMatchingTarget()
+    {
+        // Find the EnemyMover instance in the scene.
+        EnemyMover enemy = FindObjectOfType<EnemyMover>();
+        if (enemy)
+        {
+            Renderer[] childRenderers = enemy.GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in childRenderers)
+            {
+                if (r.sharedMaterial.color == cannonColor)
+                {
+                    // If we find a child with a matching color, set it as the target.
+                    target = r.transform;
+                    break;
+                }
+            }
+        }
+    }
+
     private void AimWeapon()
     {
-        cannonHead.LookAt(target);
-        cannonBase.LookAt(target);
+        if (target != null)
+        {
+            // Aim cannon head directly at target.
+            cannonHead.LookAt(target);
+
+            // Aim cannon base at target but only in the Y-axis.
+            Vector3 newRotation = Quaternion.LookRotation(target.position - cannonBase.position).eulerAngles;
+            cannonBase.rotation = Quaternion.Euler(0, newRotation.y, 0);
+        }
     }
 }
