@@ -11,11 +11,12 @@ TagManager:
   - sphere
   - forwardCheck
   - backCheck
+  - basicTile
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Angeler
   - Water
   - UI
   - 
