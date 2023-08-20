@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
-    [SerializeField] float waitTime = 1f,speed;
+    [SerializeField] [Range(0f, 5f)]float speed = 1f;
 
     public GameObject tile_CornerPiece;
     public GameObject tile_CornerPiece90;
@@ -14,8 +15,8 @@ public class EnemyMover : MonoBehaviour
     public GameObject tile_roadStraight;
     public GameObject tile_roadStraight90;
 
-    [SerializeField]private Vector3 lastPosition;
-    [SerializeField]private Vector3 beforeLastPosition;
+    private Vector3 lastPosition;
+    private Vector3 beforeLastPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +28,6 @@ public class EnemyMover : MonoBehaviour
     {
         foreach (Waypoint waypoint in path)
         {
-            yield return new WaitForSeconds(waitTime);
-
             // Calculate the direction from the last waypoint to the current one
             Vector3 direction = (waypoint.transform.position - lastPosition).normalized;
             GameObject prefabToInstantiate = null;
@@ -84,15 +83,19 @@ public class EnemyMover : MonoBehaviour
             Vector3 startPosition = transform.position;
             Vector3 endPosition = waypoint.transform.position;
             float travelAmount = 0f;
-            
+
             transform.LookAt(endPosition);
 
-            while(travelAmount < 1f)
+            while (travelAmount < 1f)
             {
                 travelAmount += Time.deltaTime * speed;
                 transform.position = Vector3.Lerp(startPosition, endPosition, travelAmount);
                 yield return new WaitForEndOfFrame();
             }
+
         }
     }
+
 }
+
+

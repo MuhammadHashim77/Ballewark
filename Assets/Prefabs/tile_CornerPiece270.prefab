@@ -67,6 +67,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 857139084659761752, guid: 4266129aa20093d41963ba4ea654b559,
+        type: 3}
+      propertyPath: canonNum
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 857139084659761752, guid: 4266129aa20093d41963ba4ea654b559,
+        type: 3}
+      propertyPath: isPlacable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 857139084659761752, guid: 4266129aa20093d41963ba4ea654b559,
+        type: 3}
+      propertyPath: cannonPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 8643153701516408059, guid: 0657806d80dacfb4fa0659f700de1076,
+        type: 3}
+    - target: {fileID: 857139084659761752, guid: 4266129aa20093d41963ba4ea654b559,
+        type: 3}
+      propertyPath: cannonPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 8643153701516408059, guid: cf3b1e87c156c114083702b76de3ecf9,
+        type: 3}
+    - target: {fileID: 857139084659761752, guid: 4266129aa20093d41963ba4ea654b559,
+        type: 3}
+      propertyPath: cannonPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 8643153701516408059, guid: e32b893eed2d53341a72ff8e121b4f87,
+        type: 3}
     - target: {fileID: 3605326071030665986, guid: 4266129aa20093d41963ba4ea654b559,
         type: 3}
       propertyPath: m_LocalRotation.w

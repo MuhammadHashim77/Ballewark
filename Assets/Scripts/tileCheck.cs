@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class tileCheck : MonoBehaviour
 {
+    public GameObject goneTile;
     public GameObject tile_CornerPiece;
     public GameObject tile_CornerPiece90;
     public GameObject tile_CornerPiece180;
@@ -29,6 +30,11 @@ public class tileCheck : MonoBehaviour
     {
         switch (prefab_num)
         {
+
+
+            case -1:                                    
+                prefabToInstantiate = goneTile;
+                break;
             case 0:                                    
                 prefabToInstantiate = tile_roadStraight;
                 break;

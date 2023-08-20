@@ -12,6 +12,11 @@ TagManager:
   - forwardCheck
   - backCheck
   - basicTile
+  - yellowBall
+  - redBall
+  - blueBall
+  - canon
+  - Despawner
   layers:
   - Default
   - TransparentFX
@@ -19,8 +24,8 @@ TagManager:
   - Angeler
   - Water
   - UI
-  - 
-  - 
+  - Tiles
+  - coordinates
   - 
   - 
   - 

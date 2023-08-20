@@ -21,12 +21,17 @@ public class sceneManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-    public void Two()
+   
+    public void MainMenu()
     {
-        SceneManager.LoadScene(2);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
     }
-    public void Three()
+
+    public void Retry()
     {
-        SceneManager.LoadScene(3);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
 }
